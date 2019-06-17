@@ -335,7 +335,7 @@ static inline u64 scale_exec_time(u64 delta, struct rq *rq)
 		return delta;
 
 	task_exec_scale = DIV64_U64_ROUNDUP(cur_freq *
-				arch_scale_cpu_capacity(NULL, cpu),
+				arch_scale_cpu_capacity(cpu),
 				max_freq);
 
 	return (delta * task_exec_scale) >> 10;

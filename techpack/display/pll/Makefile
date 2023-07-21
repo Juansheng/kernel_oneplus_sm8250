@@ -16,3 +16,5 @@ obj-$(CONFIG_QCOM_MDSS_DP_PLL) += dp_pll_7nm.o \
 	dp_pll_10nm.o \
 	dp_pll_10nm_util.o \
 	dp_pll_14nm.o \
+
+CFLAGS_dsi_pll_10nm.o = -I$(src)

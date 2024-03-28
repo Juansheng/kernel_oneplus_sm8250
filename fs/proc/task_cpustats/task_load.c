@@ -21,17 +21,10 @@ static u64 normalize_all_running_time = 0;
 static int target_pid_num = -1;
 static u64 target_pid[MAX_PID_NUM] = {0};
 
-#ifdef CONFIG_SCHED_WALT
-static inline u64 scale_exec_time(u64 delta, struct rq *rq)
-{
-	return (delta * rq->wrq.task_exec_scale) >> 10;
-}
-#else
 static inline u64 scale_exec_time(u64 delta, struct rq *rq)
 {
 	return delta;
 }
-#endif /* CONFIG_SCHED_WALT */
 
 void account_normalize_runtime(struct task_struct *p, u64 delta, struct rq *rq)
 {

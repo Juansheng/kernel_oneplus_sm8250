@@ -169,11 +169,8 @@ void oplus_dump_cpu_online_smp_call(void)
 {
 	static char alive_mask_buf[MASK_SIZE];
 	struct cpumask avail_mask;
-#ifdef CONFIG_SCHED_WALT
-	cpumask_andnot(&avail_mask, cpu_online_mask, cpu_isolated_mask);
-#else
+
 	cpumask_copy(&avail_mask, cpu_online_mask);
-#endif
 	scnprintf(alive_mask_buf, MASK_SIZE, "%*pb1", cpumask_pr_args(&avail_mask));
 	printk(KERN_INFO "cpu avail mask %s\n", alive_mask_buf);
 	/* print_smp_call_cpu */
@@ -188,13 +185,10 @@ void oplus_get_cpu_ping_mask(cpumask_t *pmask, int *cpu_idle_pc_state)
 {
 	int cpu;
 	struct cpumask avail_mask;
+
 	update_irq_counter();
 	cpumask_copy(pmask, cpu_online_mask);
-#ifdef CONFIG_SCHED_WALT
-	cpumask_andnot(&avail_mask, cpu_online_mask, cpu_isolated_mask);
-#else
 	cpumask_copy(&avail_mask, cpu_online_mask);
-#endif
 	for_each_cpu(cpu, cpu_online_mask) {
 		if (cpu_idle_pc_state[cpu] || cpu_isolated(cpu))
 			cpumask_clear_cpu(cpu, pmask);

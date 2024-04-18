@@ -7123,7 +7123,7 @@ static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu, int sy
 			}
 		}
 
-		if (!latency_sensitive && max_spare_cap_cpu < 0 && prev_spare_cap < 0)
+		if (latency_sensitive || (max_spare_cap_cpu < 0 && prev_spare_cap < 0))
 			continue;
 
 		eenv_pd_busy_time(&eenv, cpus, p);

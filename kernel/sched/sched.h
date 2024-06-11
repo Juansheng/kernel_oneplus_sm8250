@@ -1025,7 +1025,6 @@ struct rq {
 	struct sched_domain	*sd;
 
 	unsigned long		cpu_capacity;
-	unsigned long		cpu_capacity_orig;
 
 	struct callback_head	*balance_callback;
 
@@ -2154,7 +2153,7 @@ static inline unsigned long capacity_of(int cpu)
 
 static inline unsigned long capacity_orig_of(int cpu)
 {
-	return cpu_rq(cpu)->cpu_capacity_orig;
+	return arch_scale_cpu_capacity(cpu);
 }
 
 static inline unsigned long task_util(struct task_struct *p)
